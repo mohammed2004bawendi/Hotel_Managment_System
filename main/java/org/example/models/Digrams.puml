@@ -1,0 +1,37 @@
+@startuml
+class CalisanDAO {
+    - String sql
+    --
+    + void personelEkle(Personel personel)
+    + List<Personel> tumPersonelleriGetir()
+    + boolean personelVarMi(String kimlikNo)
+    + void personelSil(String kimlikNo)
+}
+
+class Personel {
+    - String isimSoyisim
+    - String kimlikNo
+    --
+    + String getIsimSoyisim()
+    + String getKimlikNo()
+    + abstract String benzersizKimlikOlustur()
+}
+
+class Calisan extends Personel {
+    - String gorev
+    - double maas
+    --
+    + String getGorev()
+    + double getMaas()
+    + String benzersizKimlikOlustur()
+}
+
+class BaglantiYonetici {
+    + static Connection baglantiGetir()
+}
+
+CalisanDAO --> BaglantiYonetici : kullanır
+CalisanDAO --> Personel : yönetir
+CalisanDAO --> Calisan : yönetir
+Calisan --> Personel : kalıtım
+@enduml
